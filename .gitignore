@@ -1,34 +1,24 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyc
-*.so
-.Python
-env/
-venv/
-
-# PyTorch models
+﻿# Датасеты и модели
+*.csv
 *.pth
 *.pt
-*.bin
-*.safetensors
-
-# Данные
-*.csv
-!requirements.txt
-!v2/config.txt
-
-# IDE
-.vscode/
-.idea/
-
-# OS
-.DS_Store
-
-# Папки с данными
-normal/
-popular/
+models/
 ru_go_emotions_dataset/
-models/rubert-base/
-models/rubert-tiny2/
-v1/
+final_train_dataset.csv
+viralmoments.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+*.ipynb_checkpoints
+
+# Системные
+.DS_Store
+*.swp
+*.swo

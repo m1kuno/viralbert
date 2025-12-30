@@ -1,32 +1,34 @@
 from transformers import AutoTokenizer, AutoModel
 import torch
 
-print("📥 Скачиваю rubert-base-cased...")
+print("📥 Скачиваю rubert-base с safetensors...")
 
-model_name = "ai-forever/ruBert-base"  # или "cointegrated/rubert-base-cased"
+model_name = "ai-forever/ruBert-base"
 
 try:
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    base_model = AutoModel.from_pretrained(model_name)
+    base_model = AutoModel.from_pretrained(
+        model_name,
+        use_safetensors=True  # Используем безопасный формат
+    )
     
     print(f"✅ Модель скачана!")
-    print(f"📊 Размер эмбеддингов: {base_model.config.hidden_size}")
-    print(f"📊 Параметров: ~180M")
+    print(f"📊 Hidden size: {base_model.config.hidden_size}")
     
     save_dir = "./models/rubert-base"
     tokenizer.save_pretrained(save_dir)
-    base_model.save_pretrained(save_dir)
+    base_model.save_pretrained(save_dir, safe_serialization=True)
     
     print(f"💾 Сохранено в {save_dir}")
     
-    # Тест
-    test_text = "Это невероятная история!"
-    inputs = tokenizer(test_text, return_tensors='pt', padding=True, truncation=True)
+    # Проверка
+    test = "Это тест"
+    inputs = tokenizer(test, return_tensors='pt')
     with torch.no_grad():
         outputs = base_model(**inputs)
-        embeddings = outputs.last_hidden_state[:, 0, :]
+        emb = outputs.last_hidden_state[:, 0, :]
     
-    print(f"✅ Вектор размерности: {embeddings.shape[1]}")
+    print(f"✅ Вектор: {emb.shape[1]} dims")
     
 except Exception as e:
     print(f"❌ Ошибка: {e}")
