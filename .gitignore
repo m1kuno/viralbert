@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.so
+.Python
+env/
+venv/
+
+# PyTorch models
+*.pth
+*.pt
+*.bin
+*.safetensors
+
+# Данные
+*.csv
+!requirements.txt
+!v2/config.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Папки с данными
+normal/
+popular/
+ru_go_emotions_dataset/
+models/rubert-base/
+models/rubert-tiny2/
+v1/
